@@ -119,15 +119,14 @@ def view ():
 def export_():
     with open('mini_proj.\contacts.txt', 'w') as file:
         for contact, info in contacts.items():
-            file.write(f"{contact} : {info}\n")
+            file.write(f"{contact} : {info["name"]} : {info["number"]} : {info["email"]} : {info["address"]}\n")
     print("Exported all contacts to contacts.txt")
 
 def import_ ():
-    extract = {}
     with open('mini_proj/contacts.txt', 'r') as file:
         for line in file:
-            contact, contacts = line.strip().split(': ')
-            extract[contacts] = contact
-    print(extract)
+            contact, name, number, email, address = line.strip().split(' : ')
+            contacts[contact] = {"name":name,"number":number,"email":email,"address":address}
+    print(contacts)
 
 main()
